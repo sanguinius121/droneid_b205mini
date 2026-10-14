@@ -1,0 +1,29 @@
+{
+  "repository": "https://github.com/ttsou/turbofec",
+  "commit": "6de1f4604933d6c21a0ff0c75401cffa7debf3cd",
+  "license": "GPL-3.0-or-later",
+  "project_license": "AGPL-3.0",
+  "deployment": "optional local shared library; no system installation",
+  "upstream_archive_sha256": "71f8cdcd0e6c16faaf2aa882159e067d773c722eb1f37beebef706cacf5b843a",
+  "source_hashes": {
+    "include/turbofec/conv.h": "e6152e55c04b18e5ee95f5f70b4619d6151c94afa1bf975d88c467c817a547b9",
+    "include/turbofec/rate_match.h": "823a17e2dd0bba351beb50a8904a4c7c8fefed20aeb172da0a75ed60eb811b4f",
+    "include/turbofec/turbo.h": "3e84242b1cc0487bd8cb472e175d3ad2285045af11a8070fef6f65b1903509e0",
+    "src/conv_dec.c": "332d9737e923f995a5547f8e4195513e1edb4686aff4ea92238f23f3bf2622b1",
+    "src/conv_enc.c": "78f74b8c451c484559a71df8e3eda402b3fef28cb1c06759a6a4e1954330a7f3",
+    "src/conv_gen.h": "ef893c727f47c10c46012608b18a9691c4f759b43e4b800cbdff2f88888c9d24",
+    "src/conv_rate_match.c": "53556ce185e36671962060c5974c423ec273cc5e49476217d591dbe3fd5ee68f",
+    "src/conv_sse.h": "42da6b63758494a0e868bfd26a30d547a682048f4e3d463ec947c07f5b9416d7",
+    "src/turbo_dec.c": "ba7c1ea15fd7f1fa29ad0dd70b5649f728f2c23f25e70ce453e161824a2a0952",
+    "src/turbo_enc.c": "64bfe18a1850be499f65e750a3501de73d7800a6e9a70af3a5917cc62b0446fa",
+    "src/turbo_int.h": "29f40dc0aaa58de0f2a4c1eb9970b34785b08ac9bacdcbb81e232c6b2e1ad4ec",
+    "src/turbo_rate_match.c": "b808fc751dfa4b18e248fce8d1fa3e41a7770802fb4f0ddc240ac43338db7338",
+    "src/turbo_sse.h": "8d4a430d4816cd2c2d9ce5c3d1e787f9c3a7149567641d9e9f89a8dda8c08be5",
+    "tests/codes.c": "57131ca4fee98d403a88e68a2b31648595befb436f536cb92126002e68810c24",
+    "tests/codes.h": "697f07ef52ad8e5a4e1149018e9ae62eaefbf40e3f875982721402a74650385c",
+    "tests/conv_test.c": "3a8771cf1cd8019a26bd5accb0c9f50cefa870820a111eb0e2d9ab231b03b19a",
+    "tests/noise.c": "24ab88e6cb46dad0999d346ad3fc004a97b7de882ea2ec816b327318da6ad513",
+    "tests/noise.h": "4f72fe4331dd8f57ecfbfd17e8eb7275604476a3692b094d863dc9a5668800f2",
+    "tests/turbo_test.c": "0e5067ce6091d154b0102768bd93026c97ff12a068ebcfc164346fdf4e0fe5e1"
+  }
+}

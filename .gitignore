@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.so
+native/turbofec/build_result.json
+sessions/
+captures/
+*.fc32
+*.raw
+.env
+*.pem
