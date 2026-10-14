@@ -2,6 +2,7 @@
 
 - Biên dịch lại TurboFEC từ mã nguồn đi kèm bằng GCC: đạt.
 - 54 unit tests: đạt; gồm scheduler, dự đoán tạm thời, QPSK, Turbo/CRC và đọc dữ liệu web. Không cần SDR hoặc corpus bên ngoài.
+- Clone sạch sang `/tmp/droneid-handoff-clean-check`, build TurboFEC và chạy lại 54 tests: đạt; không cần thư mục dự án gốc.
 - Receiver wrapper `--help`: đạt, không mở phần cứng.
 - Python compileall và JavaScript syntax check: đạt.
 - HTTP GET `/` trả 200; GET `/api/state` trả idle và 0 bản tin, không khởi động RF.
