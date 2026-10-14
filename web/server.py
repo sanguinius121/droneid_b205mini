@@ -7,11 +7,13 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 ROOT=Path(__file__).resolve().parents[1]
 class Receiver:
- def __init__(self):self.process=None;self.output=None;self.log=None;self.lock=threading.Lock()
+ def __init__(self):self.process=None;self.output=None;self.log=None;self.started=None;self.finished=None;self.lock=threading.Lock()
  def start(self,seconds,baseline=False):
   with self.lock:
    if self.process and self.process.poll() is None:raise ValueError('Receiver is already running')
    folder=ROOT/'sessions'/time.strftime('%Y%m%d_%H%M%S');folder.mkdir(parents=True,exist_ok=False)
+   if self.log:self.log.close()
+   self.started=time.monotonic();self.finished=None
    self.output=folder/'receiver.fc32';self.log=(folder/'receiver.log').open('w')
    command=[sys.executable,str(ROOT/'scripts/run_receiver.py'),'-o',str(self.output),'--max-seconds',str(seconds),'--max-candidates','100000','--terminal','log']
    if baseline:command.append('--baseline')
@@ -30,6 +32,8 @@ class Receiver:
   with self.lock:
    output=self.output;code=self.process.poll() if self.process else None
    running=self.process is not None and code is None
+   if self.process and not running and self.finished is None:self.finished=time.monotonic()
+   elapsed=(self.finished or time.monotonic())-self.started if self.started is not None else 0
   rows=[];summary={}
   if output:
    p=Path(str(output)+'.decoded.jsonl')
@@ -43,7 +47,7 @@ class Receiver:
    if p.exists():
     try:summary=json.loads(p.read_text())
     except ValueError:pass
-  return dict(status='running' if running else 'idle' if output is None else 'stopped' if code==0 else 'error',exit_code=code,output=str(output) if output else None,decoded_messages=len(rows),messages=rows,summary=summary)
+  return dict(status='running' if running else 'idle' if output is None else 'stopped' if code==0 else 'error',exit_code=code,output=str(output) if output else None,decoded_messages=len(rows),elapsed_s=elapsed,decoded_messages_per_s=len(rows)/elapsed if elapsed>0 else 0,messages=rows,summary=summary)
 receiver=Receiver()
 @asynccontextmanager
 async def lifespan(app):
