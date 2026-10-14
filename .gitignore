@@ -9,3 +9,4 @@ captures/
 *.raw
 .env
 *.pem
+config/*.local.json

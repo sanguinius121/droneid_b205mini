@@ -5,3 +5,5 @@ bitarray==3.8.1
 crcmod==1.7
 fastapi==0.139.2
 uvicorn==0.51.0
+pyserial==3.5
+pyzmq==27.1.0

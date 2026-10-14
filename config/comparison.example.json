@@ -1,0 +1,10 @@
+{
+  "e200_listen_ip": "172.31.100.1",
+  "e200_listen_port": 52002,
+  "e200_peer_ip": "172.31.100.2",
+  "uart_ports": [
+    "/dev/ttyUSB0",
+    "/dev/ttyUSB1"
+  ],
+  "uart_baudrate": 115200
+}

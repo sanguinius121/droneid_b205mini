@@ -2,7 +2,7 @@
 
 ## Phạm vi
 
-Đây là bản tách mã nguồn từ dự án nghiên cứu DroneSecurity-public_squash, gồm bộ thu UHD/B205mini và web hiển thị kết quả riêng của bộ thu. Không chứa firmware E200, bộ thu UART tham chiếu, dữ liệu IQ, tọa độ thực nghiệm hay các báo cáo so sánh. `receiver/` chứa luồng xử lý và các phụ thuộc nội bộ; một số mô đun cũ được giữ vì entrypoint hiện tại còn nhập chúng. Không chạy các entrypoint cũ thay cho lệnh chuẩn bên dưới.
+Đây là bản tách mã nguồn từ dự án nghiên cứu DroneSecurity-public_squash, gồm bộ thu UHD/B205mini và web hiển thị kết quả riêng của bộ thu. Không chứa firmware E200, dữ liệu IQ, tọa độ thực nghiệm hay các báo cáo so sánh. Bản bổ sung có `comparison/` để kết nối E200 và UART tham chiếu, đồng thời hiển thị ba nguồn; xem `comparison/README.md`. `receiver/` chứa luồng xử lý và các phụ thuộc nội bộ; một số mô đun cũ được giữ vì entrypoint hiện tại còn nhập chúng. Không chạy các entrypoint cũ thay cho lệnh chuẩn bên dưới.
 
 `receiver/droneid_hybrid.py` là entrypoint phần cứng. `scripts/run_receiver.py` thiết lập cấu hình đã thử gần nhất. `web/server.py` chạy web độc lập và gọi đúng wrapper này. `native/turbofec/` chứa mã C và giấy phép để biên dịch trên máy mới. `config/source_manifest.json` ghi SHA256 mã nguồn gốc trước khi chuyển thư mục; thay đổi đường dẫn thư viện TurboFEC là thay đổi phục vụ đóng gói.
 
@@ -60,6 +60,10 @@ python web/server.py --port 8088
 Mở http://127.0.0.1:8088. Chỉ khi bấm **Bắt đầu thu** web mới khởi động receiver. Mặc định 180 giây, giới hạn 100000 candidate để không dừng sớm ở 100. Bấm Dừng để lưu; đóng server cũng gửi yêu cầu dừng tiến trình do server tạo. Web đếm bản tin CRC đúng và điểm có tọa độ hợp lệ riêng biệt; bản tin không có tọa độ vẫn được đếm. Tốc độ trên web là số bản tin CRC đúng chia thời gian từ lúc web khởi động tiến trình thu đến khi tiến trình dừng, gồm cả thời gian khởi tạo và xả hàng đợi; tốc độ chuẩn của receiver nằm trong summary. Marker và trace nhóm theo serial. Xuất JSON tải trạng thái cùng toàn bộ decoded rows của phiên đang xem. Chỉ xem phiên chạy từ web hiện tại; chưa có giao diện mở lại lịch sử. Nền bản đồ cần Internet, Leaflet JS/CSS đã lưu cục bộ. Web mặc định chỉ lắng nghe localhost; nếu cần truy cập LAN dùng `--host 0.0.0.0` trong mạng tin cậy, ứng dụng chưa có đăng nhập.
 
 Không chạy terminal receiver và web receiver cùng lúc trên một SDR. Muốn dùng một bộ thu độc lập với web, chạy terminal và tự đọc `.decoded.jsonl`; UI hiện tại tự quản lý tiến trình riêng.
+
+## Web đối chứng ba nguồn (bổ sung)
+
+Chạy `python comparison/server.py --config config/comparison.local.json --port 8089` sau khi tạo config theo `config/comparison.example.json`. Hướng dẫn Ethernet E200, serial UART, định dạng đầu ra, cách đếm và replay nằm trong [comparison/README.md](comparison/README.md). Web một nguồn ở phần trước vẫn giữ nguyên. Không chạy đồng thời hai chế độ thu trên cùng SDR.
 
 ## Dữ liệu đầu ra và cách đánh giá
 

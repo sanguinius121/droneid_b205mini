@@ -5,3 +5,5 @@ bitarray>=2.4,<4
 crcmod==1.7
 fastapi>=0.100,<1
 uvicorn>=0.23,<1
+pyserial>=3.5,<4
+pyzmq>=25,<28
